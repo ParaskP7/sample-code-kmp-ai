@@ -32,3 +32,12 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+# Kotlin files
+.kotlin
+
+# iOS files
+UserInterfaceState.xcuserstate
+
+# JS files
+yarn.lock
