@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.ktor)
+    id("detekt.convention")
     application
 }
 
@@ -8,7 +9,7 @@ group = "io.petros.kmp.ai"
 version = "1.0.0"
 application {
     mainClass.set("io.petros.kmp.ai.ApplicationKt")
-    
+
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }

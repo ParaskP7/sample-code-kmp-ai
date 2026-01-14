@@ -1,0 +1,19 @@
+# Detekt configuration
+# Using buildUponDefaultConfig in Gradle files
+# Add custom rule overrides here if needed
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Composable']
+    excludes: ['**/iosMain/**']
+  MatchingDeclarationName:
+    excludes:
+      - '**/*.android.kt'
+      - '**/*.ios.kt'
+      - '**/*.jvm.kt'
+      - '**/*.js.kt'
+      - '**/*.wasmJs.kt'
+
+style:
+  UnusedImport:
+    active: true
