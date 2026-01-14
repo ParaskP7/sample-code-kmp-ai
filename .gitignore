@@ -41,3 +41,9 @@ UserInterfaceState.xcuserstate
 
 # JS files
 yarn.lock
+
+# Ktfmt
+.ktfmt/
+
+# macOS
+.DS_Store

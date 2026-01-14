@@ -41,8 +41,19 @@ Use `./gradlew` on macOS/Linux or `.\gradlew.bat` on Windows for all commands.
 
 ## Code Quality
 
+### Static Analysis
+
 - Run Detekt: `./gradlew detekt`
 - Generate Detekt baseline: `./gradlew detektBaseline`
+
+### Code Formatting
+
+- Format all Kotlin files: `./scripts/ktfmt.sh --all`
+- Format only changed files: `./scripts/ktfmt.sh --changed`
+- Format changed files vs specific branch: `./scripts/ktfmt.sh --changed --base-branch develop`
+- Install pre-commit hook (one-time setup): `./scripts/setup-hooks.sh`
+
+**Note:** Pre-commit hook automatically formats staged Kotlin files before commit. To bypass: `git commit --no-verify`
 
 ## Version Configuration
 
@@ -53,6 +64,7 @@ All versions are managed in `gradle/libs.versions.toml`:
 - **Kotlin:** 2.3.0
 - **Compose Multiplatform:** 1.10.0
 - **Detekt:** 2.0.0-alpha.1
+- **Ktfmt:** 0.61 (maintained in scripts, not version catalog)
 - **Ktor:** 3.3.3
 - **Android SDK:** compileSdk 36, minSdk 24, targetSdk 36
 - **JVM Target:** Java 11
@@ -68,6 +80,8 @@ All versions are managed in `gradle/libs.versions.toml`:
 - KMP modules with Android targets must use `com.android.kotlin.multiplatform.library` plugin
 - Android configuration in KMP modules uses `kotlin { androidLibrary { } }` instead of top-level `android { }`
 - Detekt static analysis is configured via build-logic convention plugin for all modules
+- Ktfmt code formatting uses Kotlinlang style (4-space indent, 120-char line length) configured in `.editorconfig`
+- Pre-commit hook automatically formats Kotlin files on commit
 
 ## Build Verification
 

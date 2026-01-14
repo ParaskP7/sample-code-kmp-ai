@@ -26,6 +26,7 @@ This documentation is split into focused files for easier navigation:
 - **Kotlin:** 2.3.0
 - **Compose Multiplatform:** 1.10.0
 - **Detekt:** 2.0.0-alpha.1
+- **Ktfmt:** 0.61 (Kotlinlang style)
 - **Ktor:** 3.3.3
 
 ### Build Commands
@@ -38,6 +39,9 @@ This documentation is split into focused files for easier navigation:
 ./gradlew lintDebug
 ./gradlew detekt
 ./gradlew test
+
+# Code formatting
+./scripts/ktfmt.sh --all
 ```
 
 See [BUILD.md](.claude/BUILD.md) for complete build guide.
@@ -72,6 +76,7 @@ See [DEVELOPMENT-RULES.md](.claude/DEVELOPMENT-RULES.md) for complete rules.
 - KMP modules use `com.android.kotlin.multiplatform.library` plugin
 - Android configuration in KMP modules uses `kotlin { androidLibrary { } }` block
 - Detekt is configured via build-logic convention plugin for all modules
+- Ktfmt auto-formats code on commit (Kotlinlang style, 4-space indent, 120-char line)
 
 ## Quick Links
 

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# Pre-commit hook that runs ktfmt on staged Kotlin files
+# Automatically formats code and re-stages files before commit
+
+set -e
+
+# Source the ktfmt library
+source "$(dirname "$0")/../../scripts/lib/ktfmt-lib.sh"
+
+# Get staged Kotlin files
+get_staged_kotlin_files() {
+  git diff --cached --name-only --diff-filter=ACM | grep -E '\.(kt|kts)$' | grep '/src/' || true
+}
+
+# Format staged Kotlin files
+format_staged_files() {
+  local files=("$@")
+
+  if [ ${#files[@]} -eq 0 ]; then
+    exit 0
+  fi
+
+  echo -e "${YELLOW}Formatting ${#files[@]} staged Kotlin file(s)...${NC}"
+
+  # Format the files
+  format_kotlin_files "${files[@]}"
+
+  # Re-stage the formatted files
+  git add "${files[@]}"
+
+  echo -e "${GREEN}Formatted and re-staged ${#files[@]} file(s)${NC}"
+}
+
+# Main execution
+main() {
+  # Download ktfmt if needed
+  download_ktfmt
+
+  # Get staged Kotlin files
+  mapfile -t staged_files < <(get_staged_kotlin_files)
+
+  # Format them
+  format_staged_files "${staged_files[@]}"
+}
+
+# Run main function
+main

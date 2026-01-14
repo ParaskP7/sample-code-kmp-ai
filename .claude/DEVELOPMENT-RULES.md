@@ -134,6 +134,51 @@ androidApplication = { ... }
 - Follow Kotlin coding conventions
 - Use proper indentation (4 spaces)
 
+## Code Formatting with Ktfmt
+
+**Automatic code formatting is enforced via ktfmt with Kotlinlang style.**
+
+### Ktfmt Configuration
+
+- **Style:** Kotlinlang (official Kotlin coding conventions)
+- **Indent:** 4 spaces
+- **Line Length:** 120 characters
+- **Configuration:** `.editorconfig` in project root
+
+### Pre-commit Hook
+
+- Pre-commit hook automatically formats staged Kotlin files before commit
+- The hook downloads ktfmt 0.61 JAR from Maven Central if not present
+- Formatted files are automatically re-staged
+- To bypass (not recommended): `git commit --no-verify`
+
+### Manual Formatting Commands
+
+```bash
+# Format all Kotlin files in the project
+./scripts/ktfmt.sh --all
+
+# Format only files changed compared to main branch
+./scripts/ktfmt.sh --changed
+
+# Format only files changed compared to specific branch
+./scripts/ktfmt.sh --changed --base-branch develop
+```
+
+### Setup for Team Members
+
+New team members should install the pre-commit hook:
+
+```bash
+./scripts/setup-hooks.sh
+```
+
+### Ktfmt Version Management
+
+- Version is maintained in `scripts/lib/ktfmt-lib.sh` (currently 0.61)
+- NOT in `gradle/libs.versions.toml` (ktfmt is a CLI tool, not a Gradle dependency)
+- Update version in one place: `KTFMT_VERSION` variable in `scripts/lib/ktfmt-lib.sh`
+
 ## Platform-Specific Conventions
 
 ### iOS (iosMain)

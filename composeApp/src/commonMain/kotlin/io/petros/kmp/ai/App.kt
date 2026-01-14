@@ -18,25 +18,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.painterResource
-
 import kmpandai.composeapp.generated.resources.Res
 import kmpandai.composeapp.generated.resources.compose_multiplatform
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun App(modifier: Modifier = Modifier) {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(
-            modifier = modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
+            modifier =
+                modifier
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+                    .safeContentPadding()
+                    .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-            }
+            Button(onClick = { showContent = !showContent }) { Text("Click me!") }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
                 Column(
