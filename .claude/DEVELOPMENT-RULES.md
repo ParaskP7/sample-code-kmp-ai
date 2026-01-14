@@ -1,0 +1,157 @@
+# Claude Code Development Rules
+
+This document contains mandatory rules for Claude Code when working with this repository.
+
+## Git Commit Rules
+
+**CRITICAL: Always ask for user confirmation before creating or amending commits.**
+
+### 1. Commit Creation
+
+- NEVER create a new commit without asking for confirmation first
+- NEVER amend an existing commit without asking for confirmation first
+
+### 2. Commit Message Format
+
+- **Title:** Single line only, maximum 72 characters
+- **Body:** Wrap all lines at 72 characters (right margin limit)
+- Include blank line between title and body
+- Always end with: `Co-Authored-By: Claude Sonnet <VERSION> <noreply@anthropic.com>`
+
+### 3. Commit Message Example
+
+```
+Quality: Add Detekt v2.0.0-alpha.1 and fix issues
+
+Add Detekt static code analysis with build-logic
+convention plugin and resolve all warnings:
+- Create build-logic module with detekt.convention
+- Configure buildUponDefaultConfig in convention plugin
+- Fix all code quality issues found
+
+Co-Authored-By: Claude Sonnet <VERSION> <noreply@anthropic.com>
+```
+
+## Version Catalog Rules (gradle/libs.versions.toml)
+
+**Always follow these rules when updating `gradle/libs.versions.toml`:**
+
+### 1. [versions] Section
+
+- Regular versions alphabetically ordered first
+- Add comment `# Android SDK versions` before SDK versions
+- Android SDK versions alphabetically ordered (compileSdk, minSdk, targetSdk)
+
+### 2. [libraries] Section
+
+- Regular libraries alphabetically ordered first
+- Add comment `# Build-logic convention plugin dependencies` before build-logic deps
+- Convention plugin dependencies alphabetically ordered
+
+### 3. [plugins] Section
+
+- All plugins alphabetically ordered
+
+### 4. Structure Example
+
+```toml
+[versions]
+agp = "9.0.0-rc03"
+kotlin = "2.3.0"
+# ... other versions alphabetically
+
+# Android SDK versions
+android-compileSdk = "36"
+android-minSdk = "24"
+android-targetSdk = "36"
+
+[libraries]
+androidx-activity-compose = { ... }
+# ... regular libraries alphabetically
+
+# Build-logic convention plugin dependencies
+detekt-gradlePlugin = { ... }
+kotlin-gradlePlugin = { ... }
+
+[plugins]
+androidApplication = { ... }
+# ... all plugins alphabetically
+```
+
+## Build Verification Rules
+
+**After making ANY code changes, ALWAYS verify the build works by running:**
+
+### 1. Required Verification Commands
+
+```bash
+./gradlew assembleDebug
+./gradlew lintDebug
+./gradlew detekt
+./gradlew test
+```
+
+### 2. When to Run
+
+- After adding/modifying dependencies
+- After code changes in any module
+- After configuration changes
+- Before creating commits
+
+### 3. What Each Command Verifies
+
+- `assembleDebug`: Code compiles successfully
+- `lintDebug`: Android lint checks pass
+- `detekt`: Static code analysis passes
+- `test`: All tests pass
+
+### 4. Handling Failures
+
+- Fix all issues before proceeding
+- Do NOT commit code that fails verification
+- Report verification results to user
+
+## Code Quality Standards
+
+### Detekt Configuration
+
+- All modules use the `detekt.convention` plugin from build-logic
+- Detekt analyzes all KMP source sets (commonMain, androidMain, iosMain, jvmMain, jsMain, wasmJsMain)
+- Custom rules configured in `config/detekt/detekt.yml`:
+  - `UnusedImport`: Active
+  - `FunctionNaming`: Ignores @Composable functions and iosMain sources
+  - `MatchingDeclarationName`: Excludes platform-specific files (*.android.kt, *.ios.kt, etc.)
+
+### Import Rules
+
+- No wildcard imports allowed (replace with explicit imports)
+- Remove unused imports
+- Organize imports alphabetically
+
+### File Formatting
+
+- All files must end with a newline
+- Follow Kotlin coding conventions
+- Use proper indentation (4 spaces)
+
+## Platform-Specific Conventions
+
+### iOS (iosMain)
+
+- Factory functions may use PascalCase (e.g., `MainViewController()`)
+- FunctionNaming rule is excluded for all iosMain sources
+
+### Expect/Actual Files
+
+- Platform-specific files use naming pattern: `FileName.platform.kt`
+  - `Platform.android.kt`
+  - `Platform.ios.kt`
+  - `Platform.jvm.kt`
+  - `Platform.js.kt`
+  - `Platform.wasmJs.kt`
+- These files are excluded from MatchingDeclarationName rule
+
+### Compose Functions
+
+- @Composable functions can use PascalCase naming
+- Preview functions use PascalCase (e.g., `AppAndroidPreview()`)
