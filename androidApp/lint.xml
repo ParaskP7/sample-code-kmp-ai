@@ -2,4 +2,7 @@
 <lint>
     <!-- Suppress AGP version check warning -->
     <issue id="AndroidGradlePluginVersion" severity="ignore" />
+
+    <!-- Suppress Gradle dependency version check - dependencies will always be out of date -->
+    <issue id="GradleDependency" severity="ignore" />
 </lint>
