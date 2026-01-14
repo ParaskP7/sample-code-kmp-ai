@@ -14,7 +14,8 @@ This documentation is split into focused files for easier navigation:
 
 - **[ARCHITECTURE.md](.claude/ARCHITECTURE.md)** - Module structure, source sets, dependency flow
 - **[BUILD.md](.claude/BUILD.md)** - Build commands, testing, version configuration
-- **[DEVELOPMENT-RULES.md](.claude/DEVELOPMENT-RULES.md)** - Git rules, version catalog rules, build verification
+- **[DEVELOPMENT-RULES.md](.claude/DEVELOPMENT-RULES.md)** - Version catalog rules, build verification, code quality standards
+- **[GIT-RULES.md](.claude/GIT-RULES.md)** - Git commit rules, message format, prefixes, release notes
 - **[MIGRATION-AGP9.md](.claude/MIGRATION-AGP9.md)** - AGP 9.0+ migration notes and breaking changes
 
 ## Quick Reference
@@ -63,11 +64,11 @@ See [ARCHITECTURE.md](.claude/ARCHITECTURE.md) for detailed architecture.
 **IMPORTANT:** Claude Code must follow strict rules when working with this repository:
 
 - Always ask for confirmation before creating or amending commits
-- Follow commit message format (72 char limit, Co-Authored-By trailer)
+- Follow commit message format (sentence case, 72 char limit, proper prefix, release notes for deps)
 - Maintain version catalog structure with alphabetical ordering
 - Run build verification commands before committing
 
-See [DEVELOPMENT-RULES.md](.claude/DEVELOPMENT-RULES.md) for complete rules.
+See [GIT-RULES.md](.claude/GIT-RULES.md) for git commit rules and [DEVELOPMENT-RULES.md](.claude/DEVELOPMENT-RULES.md) for other development rules.
 
 ## Important Notes
 
@@ -83,4 +84,5 @@ See [DEVELOPMENT-RULES.md](.claude/DEVELOPMENT-RULES.md) for complete rules.
 - [Project Architecture](.claude/ARCHITECTURE.md)
 - [Build & Testing Guide](.claude/BUILD.md)
 - [Development Rules](.claude/DEVELOPMENT-RULES.md)
+- [Git Commit Rules](.claude/GIT-RULES.md)
 - [AGP 9.0+ Migration](.claude/MIGRATION-AGP9.md)

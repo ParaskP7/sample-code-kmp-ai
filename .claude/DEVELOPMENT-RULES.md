@@ -4,33 +4,16 @@ This document contains mandatory rules for Claude Code when working with this re
 
 ## Git Commit Rules
 
+**All git commit rules have been moved to [GIT-RULES.md](GIT-RULES.md).**
+
 **CRITICAL: Always ask for user confirmation before creating or amending commits.**
 
-### 1. Commit Creation
-
-- NEVER create a new commit without asking for confirmation first
-- NEVER amend an existing commit without asking for confirmation first
-
-### 2. Commit Message Format
-
-- **Title:** Single line only, maximum 72 characters
-- **Body:** Wrap all lines at 72 characters (right margin limit)
-- Include blank line between title and body
-- Always end with: `Co-Authored-By: Claude Sonnet <VERSION> <noreply@anthropic.com>`
-
-### 3. Commit Message Example
-
-```
-Quality: Add Detekt v2.0.0-alpha.1 and fix issues
-
-Add Detekt static code analysis with build-logic
-convention plugin and resolve all warnings:
-- Create build-logic module with detekt.convention
-- Configure buildUponDefaultConfig in convention plugin
-- Fix all code quality issues found
-
-Co-Authored-By: Claude Sonnet <VERSION> <noreply@anthropic.com>
-```
+See [GIT-RULES.md](GIT-RULES.md) for:
+- Commit creation rules
+- Commit message format (title and body)
+- Commit prefixes (Deps, Quality, Format, Build, etc.)
+- Release notes requirements for dependency updates
+- Examples and best practices
 
 ## Version Catalog Rules (gradle/libs.versions.toml)
 
