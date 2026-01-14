@@ -17,3 +17,5 @@ naming:
 style:
   UnusedImport:
     active: true
+  UnusedPrivateFunction:
+    ignoreAnnotated: ['Preview']

@@ -24,12 +24,11 @@ import kmpandai.composeapp.generated.resources.Res
 import kmpandai.composeapp.generated.resources.compose_multiplatform
 
 @Composable
-@Preview
-fun App() {
+fun App(modifier: Modifier = Modifier) {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .background(MaterialTheme.colorScheme.primaryContainer)
                 .safeContentPadding()
                 .fillMaxSize(),
@@ -50,4 +49,10 @@ fun App() {
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun AppPreview() {
+    App()
 }
