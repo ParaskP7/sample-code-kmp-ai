@@ -14,6 +14,7 @@ This documentation is split into focused files for easier navigation:
 
 - **[ARCHITECTURE.md](.claude/ARCHITECTURE.md)** - Module structure, source sets, dependency flow
 - **[BUILD.md](.claude/BUILD.md)** - Build commands, testing, version configuration
+- **[CI.md](.claude/CI.md)** - Continuous integration setup with GitHub Actions
 - **[DEVELOPMENT-RULES.md](.claude/DEVELOPMENT-RULES.md)** - Version catalog rules, build verification, code quality standards
 - **[GIT-RULES.md](.claude/GIT-RULES.md)** - Git commit rules, message format, prefixes, release notes
 - **[MIGRATION-AGP9.md](.claude/MIGRATION-AGP9.md)** - AGP 9.0+ migration notes and breaking changes
@@ -83,6 +84,7 @@ See [GIT-RULES.md](.claude/GIT-RULES.md) for git commit rules and [DEVELOPMENT-R
 
 - [Project Architecture](.claude/ARCHITECTURE.md)
 - [Build & Testing Guide](.claude/BUILD.md)
+- [Continuous Integration](.claude/CI.md)
 - [Development Rules](.claude/DEVELOPMENT-RULES.md)
 - [Git Commit Rules](.claude/GIT-RULES.md)
 - [AGP 9.0+ Migration](.claude/MIGRATION-AGP9.md)
