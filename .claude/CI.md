@@ -213,13 +213,83 @@ See [DEVELOPMENT-RULES.md](DEVELOPMENT-RULES.md) for complete build verification
 - Verify cache-read-only configuration is correct
 - GitHub Actions cache might be full (cache eviction happens automatically)
 
+## Dependabot
+
+Dependabot is configured to automatically keep dependencies up to date by creating pull requests.
+
+### Configuration
+
+Dependabot configuration is defined in `.github/dependabot.yml` with two package ecosystems:
+
+#### 1. GitHub Actions Dependencies
+
+- **Schedule:** Daily
+- **PR Limit:** Maximum 5 open PRs at a time
+- **Labels:** `dependencies`, `github-actions`
+- **Commit Prefix:** `CI:`
+
+Monitors and updates:
+- `actions/checkout`
+- `actions/setup-java`
+- `gradle/actions/setup-gradle`
+- `gradle/actions/wrapper-validation`
+- `actions/upload-artifact`
+
+#### 2. Gradle Dependencies
+
+- **Schedule:** Daily
+- **PR Limit:** Maximum 10 open PRs at a time
+- **Labels:** `dependencies`, `gradle`
+- **Commit Prefix:** `Deps:`
+
+**Grouped Updates:**
+- **androidx:** All AndroidX and Android dependencies together
+- **kotlin:** Kotlin language and coroutines dependencies together
+- **compose:** Compose Multiplatform dependencies together
+- **ktor:** Ktor dependencies together
+- **detekt:** Detekt and compose-rules dependencies together
+
+**Update Types:**
+- All version updates (patch, minor, major) create PRs
+- PR limits prevent being overwhelmed by updates
+- Grouped updates reduce noise for related dependencies
+
+### Handling Dependabot PRs
+
+When Dependabot creates a PR:
+
+1. **Review the PR:**
+   - Check the changelog/release notes
+   - Look for breaking changes
+   - Review the diff if needed
+
+2. **CI automatically runs:**
+   - All 4 CI jobs (validate, build, analysis, test) run automatically
+   - Ensure all checks pass before merging
+
+3. **Merge strategy:**
+   - **Patch updates:** Generally safe to merge if CI passes
+   - **Minor updates:** Review changes, merge if no breaking changes
+   - **Major updates:** Carefully review, may require code changes
+
+4. **Commit message format:**
+   - Dependabot follows the configured commit prefix (`CI:` or `Deps:`)
+   - Ensure commit messages follow project conventions (sentence case, release notes)
+   - May need to manually edit commit message before merging
+
+### Benefits
+
+- **Security:** Automatic updates for security vulnerabilities
+- **Maintenance:** Keeps dependencies up to date with minimal effort
+- **Compatibility:** Grouped updates reduce PR noise and merge conflicts
+- **CI Integration:** Every update is automatically tested before merge
+
 ## Future Enhancements
 
 Potential improvements to consider:
 
 - Add code coverage reporting (JaCoCo)
 - Add release build job
-- Add dependency vulnerability scanning
 - Add automated PR labeling based on changed files
 - Add build performance tracking
 - Add matrix builds for multiple JDK versions

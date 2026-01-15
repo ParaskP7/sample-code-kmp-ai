@@ -1,0 +1,52 @@
+version: 2
+updates:
+  # GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "CI"
+      include: "scope"
+
+  # Gradle dependencies
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "gradle"
+    commit-message:
+      prefix: "Deps"
+      include: "scope"
+    groups:
+      # Group Android/AndroidX dependencies
+      androidx:
+        patterns:
+          - "androidx.*"
+          - "com.android.*"
+      # Group Kotlin dependencies
+      kotlin:
+        patterns:
+          - "org.jetbrains.kotlin*"
+          - "org.jetbrains.kotlinx*"
+      # Group Compose dependencies
+      compose:
+        patterns:
+          - "org.jetbrains.compose*"
+          - "androidx.compose*"
+      # Group Ktor dependencies
+      ktor:
+        patterns:
+          - "io.ktor*"
+      # Group Detekt dependencies
+      detekt:
+        patterns:
+          - "dev.detekt*"
+          - "io.nlopez.compose.rules*"
